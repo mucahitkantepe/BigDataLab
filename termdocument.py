@@ -1,6 +1,6 @@
+import numpy as np
 from pymongo import MongoClient
 from sklearn.feature_extraction.text import TfidfVectorizer
-import numpy as np
 
 client = MongoClient()
 db = client.twitter
@@ -17,8 +17,7 @@ def find(query):
         cursor = timeline.find(query,projection)
 
     except Exception as e:
-        print
-        "Unexpected error:", type(e), e
+        print("Unexpected error:", type(e), e)
 
     for doc in cursor:
         tweetDict = {}
@@ -39,7 +38,6 @@ merged = []
 
 for tweet in  tweetDictList:
     tweetDict = {}
-    index1 = find_index(tweetDictList,'id',tweet['id'])
     index2 = find_index(merged,'id',tweet['id'])
     #if in  list
     if index2 >= 0:
