@@ -17,7 +17,7 @@ projection = {'_id': 0, 'user.id': 1, 'user.screen_name': 1, 'user.name': 1, 'us
 
 def find(query):
     try:
-        cursor = timeline.find({}, projection)
+        cursor = timeline.find(query, projection)
 
     except Exception as e:
         print("Unexpected error:", type(e), e)

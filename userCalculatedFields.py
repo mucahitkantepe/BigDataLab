@@ -16,7 +16,6 @@ users = db.users
 query = {}
 projection = {'_id': 0}
 
-
 def find(query):
     try:
         cursor = users.find(query, projection)
@@ -46,7 +45,6 @@ def find(query):
             created_at = datetime.strptime(user['user']['created_at'], "%a %b %d %H:%M:%S +0000 %Y")
             twitter_age = relativedelta(datetime.now(), created_at).years
             users.update_one({'user.id': user['user']['id']}, {'$set': {'twitter_age': twitter_age}})
-            num_db_tweet = timeline.find({'user.id': user['user']['id']}).count()
             users.update_one({'user.id': user['user']['id']}, {'$set': {'num_db_tweet': num_db_tweet}})
 
         except Exception as e:
@@ -101,19 +99,20 @@ def find(query):
                 following = tweet['user']['friends_count']
             except:
                 pass
-        avg_num_chars = int(num_of_chars / tweets.count())
-        rate_rt = round(retweeted_counter / tweets.count(), 4)
-        rate_url = round(url_counter / tweets.count(), 4)
-        rate_mention = round(num_mentions / tweets.count(), 4)
-        rate_place = round(place_counter / tweets.count(), 4)
-        rate_mobile = round(mobile_counter / tweets.count(), 4)
-        rate_fav = round(fav_counter / tweets.count(), 4)
-        rate_photo = round(photo_counter / tweets.count(), 4)
-        rate_gif = round(gif_counter / tweets.count(), 4)
+        num_db_tweet = tweets.count()
+        avg_num_chars = int(num_of_chars / num_db_tweet)
+        rate_rt = round(retweeted_counter / num_db_tweet, 4)
+        rate_url = round(url_counter / num_db_tweet, 4)
+        rate_mention = round(num_mentions / num_db_tweet, 4)
+        rate_place = round(place_counter / num_db_tweet, 4)
+        rate_mobile = round(mobile_counter / num_db_tweet, 4)
+        rate_fav = round(fav_counter / num_db_tweet, 4)
+        rate_photo = round(photo_counter / num_db_tweet, 4)
+        rate_gif = round(gif_counter / num_db_tweet, 4)
         rate_follow = round((followers / following), 4)
-        rate_turkish = round(turkish_counter / tweets.count(), 4)
-        rate_hashtags = round(hashtag_counter / tweets.count(), 4)
-        rate_geo = round(geo_counter / tweets.count(), 4)
+        rate_turkish = round(turkish_counter / num_db_tweet, 4)
+        rate_hashtags = round(hashtag_counter / num_db_tweet, 4)
+        rate_geo = round(geo_counter / num_db_tweet, 4)
 
         users.update_one({'user.id': user['user']['id']}, {'$set':
                                                                {'day_of_month_active':
@@ -139,7 +138,7 @@ def find(query):
                                                                    , 'rate_hashtags': rate_hashtags
                                                                    , 'rate_geo': rate_geo
                                                                    , 'date_last_tweet': date_last_tweet
+                                                                   , 'num_db_tweet': num_db_tweet
                                                                 }})
-
 
 find(query)
