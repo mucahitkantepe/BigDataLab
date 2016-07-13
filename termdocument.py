@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 from pymongo import MongoClient
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -55,16 +56,26 @@ terms = np.array(vect.get_feature_names())
 docs = np.asarray(tfidf)
 dtm = np.asarray([docs,terms]).tolist()
 similarityMatrix = (tfidf * tfidf.T).A
-sumdocs = np.sum(docs,axis=0)
-# meandocs = np.mean(docs,axis=0)
-# stddocs = np.std(docs,axis=0)
+sumdocs = tfidf.sum(axis=0)
+meandocs = tfidf.mean(axis=0)
+
 np.savetxt("foo.csv", similarityMatrix, delimiter=",")
+
+# histogram start
+
+plt.title(merged[0]['id'])
+plt.hist(similarityMatrix[0], np.arange(0.0, 1.0, 0.1))
+plt.show()
+
+plt.plot(similarityMatrix[10])
+plt.show()
+
+# histogram end
 
 vect = TfidfVectorizer(min_df=1)
 X = vect.fit_transform([d['text'] for d in tweetDictList])
 terms = np.array(vect.get_feature_names())
 docs = np.asarray(X)
 dtm = np.asarray([docs,terms]).tolist()
-sumdocs = np.sum(docs,axis=0)
-# meandocs = np.mean(docs, axis=0)
-# stddocs = np.std(docs, axis=0)
+sumdocs = tfidf.sum(axis=0)
+meandocs = tfidf.mean(axis=0)
