@@ -6,6 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 client = MongoClient()
 db = client.twitter
 timeline = db.timeline
+users = db.users
 
 query ={}
 projection = {'text' : 1, '_id' : 0,'user.id' : 1}
@@ -59,16 +60,22 @@ similarityMatrix = (tfidf * tfidf.T).A
 sumdocs = tfidf.sum(axis=0)
 meandocs = tfidf.mean(axis=0)
 
+print((tfidf.getrow(1)))
+
+for i, row in enumerate(tfidf.toarray()):
+    # print(row,"asd")
+    users.update_one({'user.id': merged[i]['id']}, {'$set': {'tdidf': row.tolist()}})
+
 np.savetxt("foo.csv", similarityMatrix, delimiter=",")
 
 # histogram start
 
 plt.title(merged[0]['id'])
 plt.hist(similarityMatrix[0], np.arange(0.0, 1.0, 0.1))
-plt.show()
+# plt.show()
 
 plt.plot(similarityMatrix[10])
-plt.show()
+# plt.show()
 
 # histogram end
 
