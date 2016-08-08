@@ -3,9 +3,9 @@ from collections import OrderedDict
 from pymongo import MongoClient
 from sklearn import cross_validation
 from sklearn import preprocessing
-from sklearn import svm, metrics
+from sklearn import svm
 
-from twitter_miner import standardizer
+from user_standardizer import standardizer
 
 connection = MongoClient()
 db = connection.university
@@ -35,17 +35,11 @@ try:
     data = preprocessing.normalize(([list(user.values())[0:len(user) - 1] for user in userList]), norm='l2')
     target = [list(user.values())[-1] for user in userList]
 
+    k_fold = cross_validation.KFold(len(data), 10, shuffle=True)
     X_train, X_test, y_train, y_test = cross_validation.train_test_split(data, target, train_size=0.9, test_size=0.1)
     classifier = svm.SVC().fit(X_train, y_train)
 
-    Y_pred = classifier.predict(X_test)
-    scores = cross_validation.cross_val_score(classifier, data, target, cv=5)
-
-    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
-    print("Score : ", classifier.score(X_test, y_test))
-    print("Recall: %1.3f" % metrics.recall_score(y_test, Y_pred, average='macro'))
-    # print("Precision score :",metrics.precision_score(y_test, Y_pred,average=None))
-
+    print(classifier.score(X_test, y_test))
 
 except Exception as e:
     print("Unexpected error:", type(e), e)
