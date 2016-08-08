@@ -1,0 +1,6 @@
+[debug] Copy resource mappings: 
+[debug] 	(/home/who/IdeaProjects/PotatoBackEnd/conf/routes,/home/who/IdeaProjects/PotatoBackEnd/target/scala-2.11/classes/routes)
+[debug] 	(/home/who/IdeaProjects/PotatoBackEnd/conf/evolutions,/home/who/IdeaProjects/PotatoBackEnd/target/scala-2.11/classes/evolutions)
+[debug] 	(/home/who/IdeaProjects/PotatoBackEnd/conf/application.conf,/home/who/IdeaProjects/PotatoBackEnd/target/scala-2.11/classes/application.conf)
+[debug] 	(/home/who/IdeaProjects/PotatoBackEnd/conf/evolutions/default,/home/who/IdeaProjects/PotatoBackEnd/target/scala-2.11/classes/evolutions/default)
+[debug] 	(/home/who/IdeaProjects/PotatoBackEnd/conf/evolutions/default/1.sql,/home/who/IdeaProjects/PotatoBackEnd/target/scala-2.11/classes/evolutions/default/1.sql)
