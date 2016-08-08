@@ -1,0 +1,77 @@
+2016-08-06 12:55:28,276 [INFO] from play.core.server.NettyServer in pool-4-thread-5 - Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+2016-08-06 12:55:37,041 [WARN] from application in ForkJoinPool-1-worker-1 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2016-08-06 12:55:37,673 [WARN] from application in ForkJoinPool-1-worker-1 - application.conf @ file:/home/who/IdeaProjects/PotatoBackEnd/target/scala-2.11/classes/application.conf: 74: user is deprecated, use username instead
+2016-08-06 12:55:37,682 [INFO] from application in ForkJoinPool-1-worker-1 - Creating Pool for datasource 'default'
+2016-08-06 12:55:37,792 [INFO] from play.api.db.DefaultDBApi in ForkJoinPool-1-worker-1 - Database [default] connected at jdbc:postgresql://localhost:5432/deneme
+2016-08-06 12:55:38,415 [ERROR] from application in netty-event-loop-3 - 
+
+! @71235hokg - Internal server error, for (GET) [/] ->
+ 
+play.api.UnexpectedException: Unexpected exception[ProvisionException: Unable to provision, see the following errors:
+
+1) No implementation for play.api.db.slick.DatabaseConfigProvider was bound.
+  while locating play.api.db.slick.DatabaseConfigProvider
+    for parameter 0 at dao.UserInfoDAO.<init>(UserInfoDAO.scala:14)
+  while locating dao.UserInfoDAO
+    for parameter 0 at controllers.UserController.<init>(UserController.scala:15)
+  while locating controllers.UserController
+    for parameter 3 at router.Routes.<init>(Routes.scala:43)
+  while locating router.Routes
+  while locating play.api.inject.RoutesProvider
+  while locating play.api.routing.Router
+    for parameter 0 at play.api.http.JavaCompatibleHttpRequestHandler.<init>(HttpRequestHandler.scala:200)
+  while locating play.api.http.JavaCompatibleHttpRequestHandler
+  while locating play.api.http.HttpRequestHandler
+    for parameter 4 at play.api.DefaultApplication.<init>(Application.scala:221)
+  at play.api.DefaultApplication.class(Application.scala:221)
+  while locating play.api.DefaultApplication
+  while locating play.api.Application
+
+1 error]
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(DevServerStart.scala:170)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(DevServerStart.scala:126)
+	at scala.Option.map(Option.scala:146)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1$$anonfun$apply$1.apply(DevServerStart.scala:126)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1$$anonfun$apply$1.apply(DevServerStart.scala:124)
+	at scala.util.Success.flatMap(Try.scala:231)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:124)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:116)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1402)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+Caused by: com.google.inject.ProvisionException: Unable to provision, see the following errors:
+
+1) No implementation for play.api.db.slick.DatabaseConfigProvider was bound.
+  while locating play.api.db.slick.DatabaseConfigProvider
+    for parameter 0 at dao.UserInfoDAO.<init>(UserInfoDAO.scala:14)
+  while locating dao.UserInfoDAO
+    for parameter 0 at controllers.UserController.<init>(UserController.scala:15)
+  while locating controllers.UserController
+    for parameter 3 at router.Routes.<init>(Routes.scala:43)
+  while locating router.Routes
+  while locating play.api.inject.RoutesProvider
+  while locating play.api.routing.Router
+    for parameter 0 at play.api.http.JavaCompatibleHttpRequestHandler.<init>(HttpRequestHandler.scala:200)
+  while locating play.api.http.JavaCompatibleHttpRequestHandler
+  while locating play.api.http.HttpRequestHandler
+    for parameter 4 at play.api.DefaultApplication.<init>(Application.scala:221)
+  at play.api.DefaultApplication.class(Application.scala:221)
+  while locating play.api.DefaultApplication
+  while locating play.api.Application
+
+1 error
+	at com.google.inject.internal.InjectorImpl$2.get(InjectorImpl.java:1025)
+	at com.google.inject.internal.InjectorImpl.getInstance(InjectorImpl.java:1051)
+	at play.api.inject.guice.GuiceInjector.instanceOf(GuiceInjectorBuilder.scala:405)
+	at play.api.inject.guice.GuiceInjector.instanceOf(GuiceInjectorBuilder.scala:400)
+	at play.api.inject.guice.GuiceApplicationBuilder.build(GuiceApplicationBuilder.scala:123)
+	at play.api.inject.guice.GuiceApplicationLoader.load(GuiceApplicationLoader.scala:21)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1$$anonfun$apply$1$$anonfun$1$$anonfun$2.apply(DevServerStart.scala:158)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1$$anonfun$apply$1$$anonfun$1$$anonfun$2.apply(DevServerStart.scala:155)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(DevServerStart.scala:155)
+	... 14 common frames omitted
